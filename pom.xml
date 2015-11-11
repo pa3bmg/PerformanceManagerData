@@ -51,12 +51,32 @@
     <plugin.gitCommitId.gitProperties.path>target/git-resources/</plugin.gitCommitId.gitProperties.path>
     <plugin.gitCommitId.gitProperties.fileName>${plugin.gitCommitId.gitProperties.path}git.properties</plugin.gitCommitId.gitProperties.fileName>
 
+    <junit.version>4.12</junit.version>
+
     <!-- Manifest properties -->
     <manifest.permissions>all-permissions</manifest.permissions>
     <manifest.codebase>*</manifest.codebase>
     <manifest.applicationName>${project.artifactId}</manifest.applicationName>
     <manifest.applicationLibraryAllowableCodebase>*</manifest.applicationLibraryAllowableCodebase>
   </properties>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+    </dependency>
+  </dependencies>
+
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>junit</groupId>
+        <artifactId>junit</artifactId>
+        <version>${junit.version}</version>
+        <scope>test</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
 
   <build>
