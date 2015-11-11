@@ -1,4 +1,4 @@
-package nl.pa3bmg.perform.srtg.common;
+package nl.pa3bmg.perform.srtg.common.internal;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -10,15 +10,15 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
-import nl.pa3bmg.perform.srtg.generated.sla.RttMonCtrlAdmin;
+import nl.pa3bmg.perform.srtg.generated.info.Info;
 
-public class JAXBSla {
+public class JAXBInfo {
 	private Unmarshaller unmarshaller = null;
 	private Marshaller marshaller = null;
-	private String instance = "nl.pa3bmg.perform.srtg.generated.sla";
+	private String instance = "nl.pa3bmg.perform.srtg.generated.info";
 	private boolean Status =false;
 	
-	public JAXBSla() {
+	public JAXBInfo() {
 		try {
 			JAXBContext context = JAXBContext.newInstance(instance);
 			unmarshaller = context.createUnmarshaller();
@@ -29,19 +29,19 @@ public class JAXBSla {
 		}
 	}
 	
-	public RttMonCtrlAdmin readSlaXML(String fileName) {
+	public Info readInfoXML(String fileName) {
 		if (!Status) return null;
-		RttMonCtrlAdmin info = null;
+		Info info = null;
 		try {
 			File f = new File(fileName);
-			info = (RttMonCtrlAdmin) unmarshaller.unmarshal(f);
+			info = (Info) unmarshaller.unmarshal(f);
 		} catch (JAXBException e) {
 			return null;
 		}
 		return info;
 	}
 	
-	public boolean writeSlaToXML(String fileName, RttMonCtrlAdmin info) {
+	public boolean writeInfoToXML(String fileName, Info info) {
 		if (!Status) return false;
 		try {
 			FileWriter fw = new FileWriter(fileName);
@@ -55,7 +55,7 @@ public class JAXBSla {
 		}
 	}
 	
-	public String writeSlaToString(RttMonCtrlAdmin info) {
+	public String writeInfoToString(Info info) {
 		if (!Status) return null;
 		try {
 			StringWriter writer = new StringWriter();

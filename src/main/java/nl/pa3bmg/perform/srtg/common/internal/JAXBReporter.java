@@ -1,4 +1,4 @@
-package nl.pa3bmg.perform.srtg.common;
+package nl.pa3bmg.perform.srtg.common.internal;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -10,15 +10,15 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
-import nl.pa3bmg.perform.srtg.generated.models.Models;
+import nl.pa3bmg.perform.srtg.generated.reporter.Reporter;
 
-public class JAXBModels {
+public class JAXBReporter {
 	private Unmarshaller unmarshaller = null;
 	private Marshaller marshaller = null;
-	private String instance = "nl.pa3bmg.perform.srtg.generated.models";
+	private String instance = "nl.pa3bmg.perform.srtg.generated.reporter";
 	private boolean Status =false;
 	
-	public JAXBModels() {
+	public JAXBReporter() {
 		try {
 			JAXBContext context = JAXBContext.newInstance(instance);
 			unmarshaller = context.createUnmarshaller();
@@ -29,23 +29,24 @@ public class JAXBModels {
 		}
 	}
 	
-	public Models readModelsXML(String fileName) {
+	public Reporter readReporterXML(String fileName) {
 		if (!Status) return null;
-		Models models = null;
+		Reporter reporter = null;
 		try {
 			File f = new File(fileName);
-			models = (Models) unmarshaller.unmarshal(f);
+			reporter = (Reporter) unmarshaller.unmarshal(f);
 		} catch (JAXBException e) {
 			return null;
 		}
-		return models;
+		return reporter;
 	}
-	
-	public boolean writeModelsToXML(String fileName, Models models) {
+
+	public boolean writeReporterToXML(String fileName, Reporter reporter) {
 		if (!Status) return false;
 		try {
 			FileWriter fw = new FileWriter(fileName);
-			marshaller.marshal(models, fw);
+			marshaller.marshal(reporter, fw);
+			fw.close();
 			return true;
 		} catch (IOException e) {
 			return false;
@@ -54,11 +55,11 @@ public class JAXBModels {
 		}
 	}
 	
-	public String writeModelsToString(Models models) {
+	public String writeReporterToString(Reporter reporter) {
 		if (!Status) return null;
 		try {
 			StringWriter writer = new StringWriter();
-			marshaller.marshal(models, writer);
+			marshaller.marshal(reporter, writer);
 			return writer.toString();
 		} catch (JAXBException e) {
 			return null;

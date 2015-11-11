@@ -1,4 +1,4 @@
-package nl.pa3bmg.perform.srtg.common;
+package nl.pa3bmg.perform.srtg.common.internal;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -10,15 +10,15 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
-import nl.pa3bmg.perform.srtg.generated.rep.RrdGraphDef;
+import nl.pa3bmg.perform.srtg.generated.models.Models;
 
-public class JAXBRrd {
+public class JAXBModels {
 	private Unmarshaller unmarshaller = null;
 	private Marshaller marshaller = null;
-	private String instance = "nl.pa3bmg.perform.srtg.generated.rep";
+	private String instance = "nl.pa3bmg.perform.srtg.generated.models";
 	private boolean Status =false;
 	
-	public JAXBRrd() {
+	public JAXBModels() {
 		try {
 			JAXBContext context = JAXBContext.newInstance(instance);
 			unmarshaller = context.createUnmarshaller();
@@ -29,24 +29,23 @@ public class JAXBRrd {
 		}
 	}
 	
-	public RrdGraphDef readRrdXML(String fileName) {
+	public Models readModelsXML(String fileName) {
 		if (!Status) return null;
-		RrdGraphDef rep = null;
+		Models models = null;
 		try {
 			File f = new File(fileName);
-			rep = (RrdGraphDef) unmarshaller.unmarshal(f);
+			models = (Models) unmarshaller.unmarshal(f);
 		} catch (JAXBException e) {
 			return null;
 		}
-		return rep;
+		return models;
 	}
 	
-	public boolean writeRrdToXML(String fileName, RrdGraphDef info) {
+	public boolean writeModelsToXML(String fileName, Models models) {
 		if (!Status) return false;
 		try {
 			FileWriter fw = new FileWriter(fileName);
-			marshaller.marshal(info, fw);
-			fw.close();
+			marshaller.marshal(models, fw);
 			return true;
 		} catch (IOException e) {
 			return false;
@@ -55,11 +54,11 @@ public class JAXBRrd {
 		}
 	}
 	
-	public String writeRrdToString(RrdGraphDef info) {
+	public String writeModelsToString(Models models) {
 		if (!Status) return null;
 		try {
 			StringWriter writer = new StringWriter();
-			marshaller.marshal(info, writer);
+			marshaller.marshal(models, writer);
 			return writer.toString();
 		} catch (JAXBException e) {
 			return null;

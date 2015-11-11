@@ -2,6 +2,14 @@ package nl.pa3bmg.perform.srtg.common;
 
 import java.net.URL;
 
+import nl.pa3bmg.perform.srtg.common.internal.JAXBInexport;
+import nl.pa3bmg.perform.srtg.common.internal.JAXBInfo;
+import nl.pa3bmg.perform.srtg.common.internal.JAXBModels;
+import nl.pa3bmg.perform.srtg.common.internal.JAXBReporter;
+import nl.pa3bmg.perform.srtg.common.internal.JAXBRrd;
+import nl.pa3bmg.perform.srtg.common.internal.JAXBSla;
+import nl.pa3bmg.perform.srtg.common.internal.JaxbImpl;
+
 /*
  * (C) 2008 ... 2015 Ton Smink PA3BMG
  */
@@ -22,15 +30,15 @@ public class JAXBHelperPM {
 
   private JAXBModels JBModels = null;
 
-  private JAXBReport JBReport = null;
-
   private JAXBReporter JBReporter = null;
 
   private JAXBRrd JBRrd = null;
 
   private JAXBSla JBSla = null;
 
-  private JAXBSlogger JBSlogger = null;
+  private final static JaxbImpl<Report> C_JAXB_REPORT = new JaxbImpl<Report>("nl.pa3bmg.perform.srtg.generated.report", "/report.xml");
+
+  private final static JaxbImpl<Slogger> C_JAXB_SLOGGER = new JaxbImpl<Slogger>("nl.pa3bmg.perform.srtg.generated.slogger", "/logger.xml");
 
   //// JBInexport //////////////////////////////////////////////
   public Inexport readImportXML(String fileName) {
@@ -99,25 +107,16 @@ public class JAXBHelperPM {
   }
 
   ////JAXBReport //////////////////////////////////////////////
-  public Report readReportXML(String fileName) {
-    if (JBReport == null) {
-      JBReport = new JAXBReport();
-    }
-    return JBReport.readReportXML(fileName);
+  public static Report readReportXML(String pFileName) {
+    return C_JAXB_REPORT.readXml(pFileName);
   }
 
-  public boolean writeReportToXML(String fileName, Report report) {
-    if (JBReport == null) {
-      JBReport = new JAXBReport();
-    }
-    return JBReport.writeReportToXML(fileName, report);
+  public static boolean writeReportToXML(String pFileName, Report pReport) {
+    return C_JAXB_REPORT.writeToXml(pFileName, pReport);
   }
 
-  public String writeReportToString(Report report) {
-    if (JBReport == null) {
-      JBReport = new JAXBReport();
-    }
-    return JBReport.writeReportToString(report);
+  public static String writeReportToString(Report pReport) {
+    return C_JAXB_REPORT.writeToString(pReport);
   }
 
   ////JAXBReporter //////////////////////////////////////////////
@@ -165,32 +164,24 @@ public class JAXBHelperPM {
   }
 
   ////JAXBSlogger //////////////////////////////////////////////
-  public Slogger readLoggerXML(URL pUrl) {
-    if (JBSlogger == null) {
-      JBSlogger = new JAXBSlogger();
-    }
-    return JBSlogger.readLoggerXML(pUrl);
+  public static Slogger readLoggerXML() {
+    return C_JAXB_SLOGGER.readXml();
   }
 
-  public Slogger readLoggerXML(String fileName) {
-    if (JBSlogger == null) {
-      JBSlogger = new JAXBSlogger();
-    }
-    return JBSlogger.readLoggerXML(fileName);
+  public static Slogger readLoggerXML(URL pUrl) {
+    return C_JAXB_SLOGGER.readXml(pUrl);
   }
 
-  public boolean writeLoggerToXML(String fileName, Slogger logger) {
-    if (JBSlogger == null) {
-      JBSlogger = new JAXBSlogger();
-    }
-    return JBSlogger.writeLoggerToXML(fileName, logger);
+  public static Slogger readLoggerXML(String pFileName) {
+    return C_JAXB_SLOGGER.readXml(pFileName);
   }
 
-  public String writeLoggerToString(Slogger logger) {
-    if (JBSlogger == null) {
-      JBSlogger = new JAXBSlogger();
-    }
-    return JBSlogger.writeLoggerToString(logger);
+  public static boolean writeLoggerToXML(String pFileName, Slogger pSlogger) {
+    return C_JAXB_SLOGGER.writeToXml(pFileName, pSlogger);
+  }
+
+  public static String writeLoggerToString(Slogger pSlogger) {
+    return C_JAXB_SLOGGER.writeToString(pSlogger);
   }
 
   ////JAXBSlogger //////////////////////////////////////////////

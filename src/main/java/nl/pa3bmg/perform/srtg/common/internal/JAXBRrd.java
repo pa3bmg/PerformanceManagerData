@@ -1,4 +1,4 @@
-package nl.pa3bmg.perform.srtg.common;
+package nl.pa3bmg.perform.srtg.common.internal;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -10,15 +10,15 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
-import nl.pa3bmg.perform.srtg.generated.report.Report;
+import nl.pa3bmg.perform.srtg.generated.rep.RrdGraphDef;
 
-public class JAXBReport {
+public class JAXBRrd {
 	private Unmarshaller unmarshaller = null;
 	private Marshaller marshaller = null;
-	private String instance = "nl.pa3bmg.perform.srtg.generated.report";
+	private String instance = "nl.pa3bmg.perform.srtg.generated.rep";
 	private boolean Status =false;
 	
-	public JAXBReport() {
+	public JAXBRrd() {
 		try {
 			JAXBContext context = JAXBContext.newInstance(instance);
 			unmarshaller = context.createUnmarshaller();
@@ -29,23 +29,23 @@ public class JAXBReport {
 		}
 	}
 	
-	public Report readReportXML(String fileName) {
+	public RrdGraphDef readRrdXML(String fileName) {
 		if (!Status) return null;
-		Report report = null;
+		RrdGraphDef rep = null;
 		try {
 			File f = new File(fileName);
-			report = (Report) unmarshaller.unmarshal(f);
+			rep = (RrdGraphDef) unmarshaller.unmarshal(f);
 		} catch (JAXBException e) {
 			return null;
 		}
-		return report;
+		return rep;
 	}
 	
-	public boolean writeReportToXML(String fileName, Report report) {
+	public boolean writeRrdToXML(String fileName, RrdGraphDef info) {
 		if (!Status) return false;
 		try {
 			FileWriter fw = new FileWriter(fileName);
-			marshaller.marshal(report, fw);
+			marshaller.marshal(info, fw);
 			fw.close();
 			return true;
 		} catch (IOException e) {
@@ -55,11 +55,11 @@ public class JAXBReport {
 		}
 	}
 	
-	public String writeReportToString(Report report) {
+	public String writeRrdToString(RrdGraphDef info) {
 		if (!Status) return null;
 		try {
 			StringWriter writer = new StringWriter();
-			marshaller.marshal(report, writer);
+			marshaller.marshal(info, writer);
 			return writer.toString();
 		} catch (JAXBException e) {
 			return null;
