@@ -1,0 +1,13 @@
+target/
+# Do not archive Eclipse IDE specific files.
+bin/
+.settings/
+.project
+.classpath
+# Do not archive file(s) created by Git rebase / merge.
+*.orig
+# Do not archive file(s) created by Maven.
+*.releaseBackup
+*.ser
+release.properties
+velocity.log

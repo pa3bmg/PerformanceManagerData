@@ -1,0 +1,340 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <name>Performance Manager Data</name>
+  <groupId>nl.pa3bmg.perform</groupId>
+  <artifactId>nl.pa3bmg.perform</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+
+  <packaging>bundle</packaging>
+  <inceptionYear>2015</inceptionYear>
+
+  <developers>
+    <developer>
+      <name>${project.developer.name}</name>
+    </developer>
+  </developers>
+
+  <scm>
+    <connection>scm:git:https://github.com/pa3bmg/PerformanceManagerData.git</connection>
+    <developerConnection>scm:git:https://github.com/pa3bmg/PerformanceManagerData.git</developerConnection>
+    <url>https://github.com/pa3bmg/PerformanceManagerData</url>
+    <tag>HEAD</tag>
+  </scm>
+
+  <prerequisites>
+    <maven>3.0.4</maven>
+  </prerequisites>
+
+  <properties>
+    <maven.build.timestamp.format>yyyyMMdd-HHmm</maven.build.timestamp.format>
+    <timestamp>${maven.build.timestamp}</timestamp>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.developer.name>Ton Smink</project.developer.name>
+
+    <plugin.mavenCompiler.version>3.3</plugin.mavenCompiler.version>
+    <plugin.mavenCompiler.compilerVersion>1.7</plugin.mavenCompiler.compilerVersion>
+    <plugin.mavenCompiler.source>1.7</plugin.mavenCompiler.source>
+    <plugin.mavenCompiler.target>1.7</plugin.mavenCompiler.target>
+    <plugin.mavenResources.version>2.7</plugin.mavenResources.version>
+    <plugin.mavenRelease.version>2.5.1</plugin.mavenRelease.version>
+    <plugin.mavenBundle.version>2.5.3</plugin.mavenBundle.version>
+    <plugin.mavenBundle.instructions.includeResource>{maven-resources}</plugin.mavenBundle.instructions.includeResource>
+    <plugin.mavenDeploy.version>2.8.2</plugin.mavenDeploy.version>
+    <plugin.mavenScm.version>1.8.1</plugin.mavenScm.version>
+    <plugin.dependsMaven.version>1.2</plugin.dependsMaven.version>
+
+    <!-- Problem with tag in repositories. -->
+    <!-- Workaround. Create minimal one tag in current branche. Example: Initial commit with tag '0.1 -->
+    <plugin.gitCommitId.version>2.1.9</plugin.gitCommitId.version>
+    <plugin.gitCommitId.git.basePartDirectory>/.git</plugin.gitCommitId.git.basePartDirectory>
+    <plugin.gitCommitId.git.directory>${project.basedir}${plugin.gitCommitId.git.basePartDirectory}</plugin.gitCommitId.git.directory>
+    <plugin.gitCommitId.gitProperties.path>target/git-resources/</plugin.gitCommitId.gitProperties.path>
+    <plugin.gitCommitId.gitProperties.fileName>${plugin.gitCommitId.gitProperties.path}git.properties</plugin.gitCommitId.gitProperties.fileName>
+
+    <!-- Manifest properties -->
+    <manifest.permissions>all-permissions</manifest.permissions>
+    <manifest.codebase>*</manifest.codebase>
+    <manifest.applicationName>${project.artifactId}</manifest.applicationName>
+    <manifest.applicationLibraryAllowableCodebase>*</manifest.applicationLibraryAllowableCodebase>
+  </properties>
+
+
+  <build>
+    <defaultGoal>install</defaultGoal>
+
+    <resources>
+      <resource>
+        <directory>src/main/resources</directory>
+        <filtering>true</filtering>
+      </resource>
+      <resource>
+        <directory>${plugin.gitCommitId.gitProperties.path}</directory>
+        <includes>
+          <include>*.properties</include>
+        </includes>
+      </resource>
+    </resources>
+
+    <plugins>
+      <!-- Necessary for compilation. -->
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+      </plugin>
+      <!-- Necessary for package type bundle. -->
+      <plugin>
+        <groupId>org.apache.felix</groupId>
+        <artifactId>maven-bundle-plugin</artifactId>
+      </plugin>
+    </plugins>
+
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>${plugin.mavenCompiler.version}</version>
+          <configuration>
+            <source>${plugin.mavenCompiler.source}</source>
+            <target>${plugin.mavenCompiler.target}</target>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-resources-plugin</artifactId>
+          <version>${plugin.mavenResources.version}</version>
+          <executions>
+            <execution>
+              <id>filter</id>
+              <goals>
+                <goal>resources</goal>
+              </goals>
+            </execution>
+          </executions>
+          <configuration>
+            <escapeString>\</escapeString>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-release-plugin</artifactId>
+          <version>${plugin.mavenRelease.version}</version>
+          <configuration>
+            <preparationGoals>clean install</preparationGoals>
+            <autoVersionSubmodules>true</autoVersionSubmodules>
+            <pushChanges>false</pushChanges>
+            <localCheckout>true</localCheckout>
+            <tagNameFormat>@{project.artifactId}_@{project.version}_${timestamp}</tagNameFormat>
+            <workingDirectory>V:/release/git/${timestamp}</workingDirectory>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-deploy-plugin</artifactId>
+          <version>${plugin.mavenDeploy.version}</version>
+          <configuration>
+            <retryFailedDeploymentCount>3</retryFailedDeploymentCount>
+            <deployAtEnd>true</deployAtEnd>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.felix</groupId>
+          <artifactId>maven-bundle-plugin</artifactId>
+          <version>${plugin.mavenBundle.version}</version>
+          <extensions>true</extensions>
+          <configuration>
+            <instructions>
+              <Bundle-SymbolicName>${project.artifactId}</Bundle-SymbolicName>
+              <Bundle-RequiredExecutionEnvironment>JavaSE-${plugin.mavenCompiler.target}</Bundle-RequiredExecutionEnvironment>
+              <Include-Resource>${plugin.mavenBundle.instructions.includeResource}</Include-Resource>
+
+              <!-- Added directly to manifest. -->
+              <Bundle-Author>${project.developer.name}</Bundle-Author>
+              <Maven-Version>${maven.version}</Maven-Version>
+              <Git-Commit-Id>${git.commit.id}</Git-Commit-Id>
+              <Git-Commit-Id-Describe>${git.commit.id.describe}</Git-Commit-Id-Describe>
+              <Git-Branch>${git.branch}</Git-Branch>
+              <Git-Remote-Origin-Url>${git.remote.origin.url}</Git-Remote-Origin-Url>
+              <Git-Commit-User-Name>${git.commit.user.name}</Git-Commit-User-Name>
+              <Git-Build-User-Name>${git.build.user.name}</Git-Build-User-Name>
+              <Build-Time-Stamp>${timestamp}</Build-Time-Stamp>
+              <Build-OS-Name>${os.name}</Build-OS-Name>
+              <Build-OS-Architecture>${os.arch}</Build-OS-Architecture>
+              <Build-OS-Version>${os.version}</Build-OS-Version>
+              <Build-OS-User>${user.name}</Build-OS-User>
+              <Build-Host-Name>${hostName}</Build-Host-Name>
+              <Permissions>${manifest.permissions}</Permissions>
+              <Codebase>${manifest.codebase}</Codebase>
+              <Application-Name>${manifest.applicationName}</Application-Name>
+              <Application-Library-Allowable-Codebase>${manifest.applicationLibraryAllowableCodebase}</Application-Library-Allowable-Codebase>
+            </instructions>
+          </configuration>
+        </plugin>
+        <!--This plugin's configuration is used to store Eclipse m2e settings only. It has no influence on the Maven build itself. -->
+        <plugin>
+          <groupId>org.eclipse.m2e</groupId>
+          <artifactId>lifecycle-mapping</artifactId>
+          <version>1.0.0</version>
+          <configuration>
+            <lifecycleMappingMetadata>
+              <pluginExecutions>
+                <pluginExecution>
+                  <pluginExecutionFilter>
+                    <groupId>pl.project13.maven</groupId>
+                    <artifactId>git-commit-id-plugin</artifactId>
+                    <versionRange>[2.0.4,)</versionRange>
+                    <goals>
+                      <goal>revision</goal>
+                    </goals>
+                  </pluginExecutionFilter>
+                  <action>
+                    <ignore />
+                  </action>
+                </pluginExecution>
+              </pluginExecutions>
+            </lifecycleMappingMetadata>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
+
+  <profiles>
+    <profile>
+      <id>release-profile</id>
+      <activation>
+        <property>
+          <name>performRelease</name>
+        </property>
+      </activation>
+      <properties>
+        <plugin.mavenSource.version>2.3</plugin.mavenSource.version>
+        <plugin.mavenJavaDoc.version>2.9.1</plugin.mavenJavaDoc.version>
+        <plugin.groovyMaven.version>2.0</plugin.groovyMaven.version>
+        <plugin.mavenJarSigner.version>1.3.2</plugin.mavenJarSigner.version>
+      </properties>
+      <build>
+        <plugins>
+          <!-- Necessary for generation javadoc jar -->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-javadoc-plugin</artifactId>
+          </plugin>
+          <!-- Necessary for generate source jar(s) -->
+          <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-source-plugin</artifactId>
+          </plugin>
+          <!-- Necessary for git info in jar. -->
+          <plugin>
+            <groupId>pl.project13.maven</groupId>
+            <artifactId>git-commit-id-plugin</artifactId>
+          </plugin>
+          <!-- Necessary to get property hostName -->
+          <plugin>
+            <groupId>org.codehaus.gmaven</groupId>
+            <artifactId>groovy-maven-plugin</artifactId>
+          </plugin>
+        </plugins>
+        <pluginManagement>
+          <plugins>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-javadoc-plugin</artifactId>
+              <version>${plugin.mavenJavaDoc.version}</version>
+              <executions>
+                <execution>
+                  <id>attach-javadocs</id>
+                  <goals>
+                    <goal>jar</goal>
+                  </goals>
+                </execution>
+              </executions>
+              <configuration>
+                <excludePackageNames>*.internal,*.impl</excludePackageNames>
+              </configuration>
+            </plugin>
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-source-plugin</artifactId>
+              <version>${plugin.mavenSource.version}</version>
+              <executions>
+                <execution>
+                  <id>attach-sources</id>
+                  <goals>
+                    <goal>jar</goal>
+                    <goal>test-jar</goal>
+                  </goals>
+                </execution>
+              </executions>
+            </plugin>
+            <plugin>
+              <groupId>org.codehaus.gmaven</groupId>
+              <artifactId>groovy-maven-plugin</artifactId>
+              <version>${plugin.groovyMaven.version}</version>
+              <executions>
+                <execution>
+                  <phase>generate-resources</phase>
+                  <goals>
+                    <goal>execute</goal>
+                  </goals>
+                  <configuration>
+                    <!-- Create property hostName. Remark: Do not use property name hostname, because this results in problems with jnlp generation! -->
+                    <source>
+                      project.properties["hostName"] = InetAddress.getLocalHost().getHostName()
+                    </source>
+                  </configuration>
+                </execution>
+              </executions>
+            </plugin>
+            <plugin>
+              <!-- GIT COMMIT ID PLUGIN CONFIGURATION -->
+              <groupId>pl.project13.maven</groupId>
+              <artifactId>git-commit-id-plugin</artifactId>
+              <version>${plugin.gitCommitId.version}</version>
+              <executions>
+                <execution>
+                  <goals>
+                    <goal>revision</goal>
+                  </goals>
+                </execution>
+              </executions>
+
+              <configuration>
+                <!-- If you'd like to tell the plugin where your .git directory is, use this setting, otherwise we'll perform a search trying to figure out the right directory. It's better to add it explicite IMHO. -->
+                <dotGitDirectory>${plugin.gitCommitId.git.directory}</dotGitDirectory>
+                <!-- this is false by default, forces the plugin to generate the git.properties file -->
+                <generateGitPropertiesFile>true</generateGitPropertiesFile>
+
+                <!-- The path for the to be generated properties file, it's relative to ${project.basedir} -->
+                <generateGitPropertiesFilename>${plugin.gitCommitId.gitProperties.fileName}</generateGitPropertiesFilename>
+
+                <!-- true by default, controls whether the plugin will fail when no .git directory is found, when set to false the plugin will just skip execution -->
+                <!-- @since 2.0.4 -->
+                <failOnNoGitDirectory>true</failOnNoGitDirectory>
+
+                <gitDescribe>
+                  <!-- when the build is triggered while the repo is in "dirty state", append this suffix -->
+                  <dirty>-dirty</dirty>
+                </gitDescribe>
+              </configuration>
+            </plugin>
+          </plugins>
+        </pluginManagement>
+      </build>
+    </profile>
+  </profiles>
+
+  <distributionManagement>
+    <repository>
+      <id>internal.repo</id>
+      <name>Internal Repository</name>
+      <url>${repository.internal.url}</url>
+    </repository>
+    <snapshotRepository>
+      <id>internal.repo</id>
+      <name>Internal Repository</name>
+      <url>${repository.internal.snapshot.url}</url>
+    </snapshotRepository>
+  </distributionManagement>
+</project>
