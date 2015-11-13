@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://perform.pa3bmg.nl/srtg/generated/slogger" targetNamespace="http://perform.pa3bmg.nl/srtg/generated/slogger" elementFormDefault="qualified" attributeFormDefault="unqualified" xml:lang="EN">
+	<xs:element name="slogger">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="group" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="name" type="xs:string"/>
+							<xs:element name="attributes" type="ns1:attributes" minOccurs="0"/>
+							<xs:element name="tableattr" type="ns1:tableattr" minOccurs="0" maxOccurs="unbounded"/>
+							<xs:element name="mtype">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="mt" type="xs:string" maxOccurs="unbounded"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="tableattr">
+		<xs:sequence>
+			<xs:element name="poll" type="xs:string"/>
+			<xs:element name="tablename" type="xs:string"/>
+			<xs:element name="attr" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="name" type="xs:string"/>
+						<xs:element name="id" type="xs:string" minOccurs="0"/>
+						<xs:element name="type" type="xs:string" minOccurs="0"/>
+						<xs:element name="log" type="xs:boolean"/>
+						<xs:element name="logsave" type="xs:boolean"/>
+						<xs:element name="index" type="xs:boolean"/>
+						<xs:element name="formule" type="ns1:Formule" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="attributes">
+		<xs:sequence>
+			<xs:element name="poll" type="xs:string"/>
+			<xs:sequence>
+				<xs:element name="attr" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="name" type="xs:string"/>
+							<xs:element name="id" type="xs:string"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="Formule">
+		<xs:sequence>
+			<xs:element name="datatype" type="xs:string"/>
+			<xs:element name="attritem" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="attr" type="xs:string" minOccurs="0"/>
+						<xs:element name="val" type="xs:string" minOccurs="0"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="calculation" maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="id1" type="xs:int"/>
+						<xs:element name="id2" type="xs:int"/>
+						<xs:element name="caltype" type="xs:string"/>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

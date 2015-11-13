@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://perform.pa3bmg.nl/srtg/generated/report" targetNamespace="http://perform.pa3bmg.nl/srtg/generated/report" elementFormDefault="qualified" attributeFormDefault="unqualified" xml:lang="EN">
+	<xs:element name="report">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="type" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="name" type="xs:string"/>
+							<xs:element name="modeltype" type="xs:string" maxOccurs="unbounded"/>
+							<xs:element name="vlable" type="xs:string"/>
+							<xs:element name="title" type="xs:string"/>
+							<xs:element name="timelabel" type="xs:string"/>
+							<xs:element name="xmltemplate" type="xs:string"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

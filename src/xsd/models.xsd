@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://perform.pa3bmg.nl/srtg/generated/models" targetNamespace="http://perform.pa3bmg.nl/srtg/generated/models" elementFormDefault="qualified" attributeFormDefault="unqualified" xml:lang="EN">
+	<xs:element name="Models">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Minfo" maxOccurs="unbounded">
+					<xs:annotation>
+						<xs:documentation>
+              A name consists of two required (first and last name)
+              and two optional parts (middle name and initials).
+          </xs:documentation>
+					</xs:annotation>
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Name" type="xs:string"/>
+							<xs:element name="Nameid" type="xs:string"/>
+							<xs:element name="Type" type="xs:string"/>
+							<xs:element name="Typeid" type="xs:string"/>
+							<xs:element name="Mactive" type="xs:boolean" minOccurs="0"/>
+							<xs:element name="Menable" type="xs:boolean" minOccurs="0"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://perform.pa3bmg.nl/statusdesk/generated/sddata" targetNamespace="http://perform.pa3bmg.nl/statusdesk/generated/sddata" elementFormDefault="qualified" attributeFormDefault="unqualified" xml:lang="EN">
+	<xs:element name="sddata">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="status" type="xs:boolean"/>
+				<xs:element name="tstamp" type="xs:long"/>
+				<xs:element name="poll" type="xs:int"/>
+				<xs:element name="specinfo">
+					<xs:complexType>
+						<xs:attribute name="server" type="xs:string"/>
+						<xs:attribute name="name" type="xs:string"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="statmodel" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="name" type="xs:string"/>
+							<xs:element name="id" type="xs:int"/>
+							<xs:element name="status" type="xs:boolean"/>
+							<xs:element name="data" type="ns1:data"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="data">
+		<xs:sequence>
+			<xs:element name="disk" type="xs:int"/>
+			<xs:element name="mem" type="xs:int"/>
+			<xs:element name="cpu" type="xs:int"/>
+			<xs:element name="temp" type="xs:int"/>
+			<xs:element name="condition" type="xs:int"/>
+			<xs:element name="contact" type="xs:int"/>
+			<xs:element name="statusval" type="xs:int"/>
+			<xs:element name="weight" type="xs:int"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://perform.pa3bmg.nl/srtg/generated/info" targetNamespace="http://perform.pa3bmg.nl/srtg/generated/info" elementFormDefault="qualified" attributeFormDefault="unqualified" xml:lang="EN">
+	<xs:element name="Info">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="record" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="index"/>
+							<xs:element name="data" type="ns1:DataRec" maxOccurs="unbounded"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="DataRec">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="val" type="xs:string"/>
+			<xs:element name="id" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

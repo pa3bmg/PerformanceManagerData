@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://perform.pa3bmg.nl/srtg/generated/rrd_graph_def" targetNamespace="http://perform.pa3bmg.nl/srtg/generated/rrd_graph_def" elementFormDefault="qualified" attributeFormDefault="unqualified" xml:lang="EN">
+	<xs:element name="rrd_graph_def">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="span">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="start" type="xs:string"/>
+							<xs:element name="end" type="xs:string"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="options">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="anti_aliasing" type="xs:boolean" minOccurs="0"/>
+							<xs:element name="arrow_color" type="xs:string"/>
+							<xs:element name="axis_color" type="xs:string"/>
+							<xs:element name="back_color" type="xs:string"/>
+							<xs:element name="background" type="xs:string" minOccurs="0"/>
+							<xs:element name="base_value" type="xs:int"/>
+							<xs:element name="canvas" type="xs:string"/>
+							<xs:element name="left_padding" type="xs:int"/>
+							<xs:element name="default_font" type="ns1:dfType" minOccurs="0"/>
+							<xs:element name="default_font_color" type="xs:string"/>
+							<xs:element name="frame_color" type="xs:string" minOccurs="0"/>
+							<xs:element name="front_grid" type="xs:boolean"/>
+							<xs:element name="grid_range" type="ns1:grType" minOccurs="0"/>
+							<xs:element name="grid_x" type="xs:boolean"/>
+							<xs:element name="grid_y" type="xs:boolean"/>
+							<xs:element name="border" type="ns1:boType"/>
+							<xs:element name="major_grid_color" type="xs:string"/>
+							<xs:element name="major_grid_x" type="xs:boolean" minOccurs="0"/>
+							<xs:element name="major_grid_y" type="xs:boolean" minOccurs="0"/>
+							<xs:element name="minor_grid_color" type="xs:string" minOccurs="0"/>
+							<xs:element name="minor_grid_x" type="xs:boolean" minOccurs="0"/>
+							<xs:element name="minor_grid_y" type="xs:boolean" minOccurs="0"/>
+							<xs:element name="overlay" type="xs:string" minOccurs="0"/>
+							<xs:element name="show_legend" type="xs:boolean" minOccurs="0"/>
+							<xs:element name="show_signature" type="xs:boolean" minOccurs="0"/>
+							<xs:element name="time_axis" type="ns1:taType" minOccurs="0"/>
+							<xs:element name="time_axis_label" type="xs:string"/>
+							<xs:element name="title" type="xs:string"/>
+							<xs:element name="title_font" type="ns1:tfType"/>
+							<xs:element name="title_font_color" type="xs:string"/>
+							<xs:element name="units_exponent" type="xs:int" minOccurs="0"/>
+							<xs:element name="value_axis" type="ns1:vaType"/>
+							<xs:element name="vertical_label" type="xs:string" minOccurs="0"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="datasources">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="def" type="ns1:devType" maxOccurs="unbounded"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="graph">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element ref="ns1:area" minOccurs="0" maxOccurs="unbounded"/>
+							<xs:element ref="ns1:stack" minOccurs="0" maxOccurs="unbounded"/>
+							<xs:element ref="ns1:line" minOccurs="0" maxOccurs="unbounded"/>
+							<xs:element ref="ns1:gprint" minOccurs="0" maxOccurs="unbounded"/>
+							<xs:element ref="ns1:hrule" minOccurs="0"/>
+							<xs:element ref="ns1:vrule" minOccurs="0"/>
+							<xs:element name="comment" type="xs:string" minOccurs="0"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="dev" type="ns1:devType"/>
+	<xs:complexType name="devType">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="rrd" type="xs:string" minOccurs="0"/>
+			<xs:element name="source" type="xs:string" minOccurs="0"/>
+			<xs:element name="cf" type="xs:string" minOccurs="0"/>
+			<xs:element name="rpn" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="area" type="ns1:ds1Type"/>
+	<xs:element name="stack" type="ns1:ds1Type"/>
+	<xs:element name="line" type="ns1:ds1Type"/>
+	<xs:element name="gprint" type="ns1:ds2Type"/>
+	<xs:element name="hrule" type="ns1:ds3Type"/>
+	<xs:element name="vrule" type="ns1:ds3Type"/>
+	<xs:complexType name="ds1Type">
+		<xs:sequence>
+			<xs:element name="datasource" type="xs:string" minOccurs="0"/>
+			<xs:element name="time1" type="xs:string" minOccurs="0"/>
+			<xs:element name="time2" type="xs:string" minOccurs="0"/>
+			<xs:element name="value1" type="xs:string" minOccurs="0"/>
+			<xs:element name="value2" type="xs:string" minOccurs="0"/>
+			<xs:element name="color" type="xs:string"/>
+			<xs:element name="legend" type="xs:string"/>
+			<xs:element name="width" type="xs:int" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ds2Type">
+		<xs:sequence>
+			<xs:element name="datasource" type="xs:string"/>
+			<xs:element name="cf" type="xs:string"/>
+			<xs:element name="format" type="xs:string"/>
+			<xs:element name="base" type="xs:string" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ds3Type">
+		<xs:sequence>
+			<xs:element name="value" type="xs:string" minOccurs="0"/>
+			<xs:element name="time" type="xs:string" minOccurs="0"/>
+			<xs:element name="color" type="xs:string"/>
+			<xs:element name="legend" type="xs:string"/>
+			<xs:element name="width" type="xs:int"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="dfType">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="style" type="xs:string"/>
+			<xs:element name="size" type="xs:int"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="grType">
+		<xs:sequence>
+			<xs:element name="lower" type="xs:int"/>
+			<xs:element name="upper" type="xs:int"/>
+			<xs:element name="rigid" type="xs:boolean"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="boType">
+		<xs:sequence>
+			<xs:element name="color" type="xs:string"/>
+			<xs:element name="width" type="xs:int"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="taType">
+		<xs:sequence>
+			<xs:element name="min_grid_time_unit" type="xs:string"/>
+			<xs:element name="min_grid_unit_steps" type="xs:int"/>
+			<xs:element name="maj_grid_time_unit" type="xs:string"/>
+			<xs:element name="maj_grid_unit_steps" type="xs:int"/>
+			<xs:element name="date_format" type="xs:string"/>
+			<xs:element name="center_labels" type="xs:boolean"/>
+			<xs:element name="first_day_of_week" type="xs:string"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="tfType">
+		<xs:sequence>
+			<xs:element name="name" type="xs:string"/>
+			<xs:element name="style" type="xs:string"/>
+			<xs:element name="size" type="xs:int"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="vaType">
+		<xs:sequence>
+			<xs:element name="grid_step" type="xs:int"/>
+			<xs:element name="label_step" type="xs:int"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

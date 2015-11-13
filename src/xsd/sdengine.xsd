@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://perform.pa3bmg.nl/statusdesk/generated/sdengine" targetNamespace="http://perform.pa3bmg.nl/statusdesk/generated/sdengine" elementFormDefault="qualified" attributeFormDefault="unqualified" xml:lang="EN">
+	<xs:element name="sdenginge">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="status">
+					<xs:complexType>
+						<xs:attribute name="change" type="xs:string"/>
+						<xs:attribute name="status" type="xs:boolean"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="specserver">
+					<xs:complexType>
+						<xs:attribute name="server" type="xs:string"/>
+						<xs:attribute name="name" type="xs:string"/>
+						<xs:attribute name="password" type="xs:string"/>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="server">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="serverproperties" type="ns1:serverproperties"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="infra">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="infraproperties" type="ns1:infraproperties"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="serverproperties">
+		<xs:sequence>
+			<xs:element name="collection">
+				<xs:complexType>
+					<xs:attribute name="name" type="xs:string"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="status_range">
+				<xs:complexType>
+					<xs:attribute name="temp_green" type="xs:int"/>
+					<xs:attribute name="temp_red" type="xs:int"/>
+					<xs:attribute name="mem_green" type="xs:int"/>
+					<xs:attribute name="mem_red" type="xs:int"/>
+					<xs:attribute name="cpu_green" type="xs:int"/>
+					<xs:attribute name="cpu_red" type="xs:int"/>
+					<xs:attribute name="disk_green" type="xs:int"/>
+					<xs:attribute name="disk_red" type="xs:int"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="status_weight">
+				<xs:complexType>
+					<xs:attribute name="contact" type="xs:int"/>
+					<xs:attribute name="condition" type="xs:int"/>
+					<xs:attribute name="temp" type="xs:int"/>
+					<xs:attribute name="mem" type="xs:int"/>
+					<xs:attribute name="cpu" type="xs:int"/>
+					<xs:attribute name="disk" type="xs:int"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="infraproperties">
+		<xs:sequence>
+			<xs:element name="collection">
+				<xs:complexType>
+					<xs:attribute name="name" type="xs:string"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="status_range">
+				<xs:complexType>
+					<xs:attribute name="mem_green" type="xs:int"/>
+					<xs:attribute name="mem_red" type="xs:int"/>
+					<xs:attribute name="cpu_green" type="xs:int"/>
+					<xs:attribute name="cpu_red" type="xs:int"/>
+					<xs:attribute name="linkload_green" type="xs:int"/>
+					<xs:attribute name="linkload_red" type="xs:int"/>
+					<xs:attribute name="linkerror_green" type="xs:int"/>
+					<xs:attribute name="linkerror_red" type="xs:int"/>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="status_weight">
+				<xs:complexType>
+					<xs:attribute name="contact" type="xs:int"/>
+					<xs:attribute name="condition" type="xs:int"/>
+					<xs:attribute name="mem" type="xs:int"/>
+					<xs:attribute name="cpu" type="xs:int"/>
+					<xs:attribute name="linkerror" type="xs:int"/>
+					<xs:attribute name="linkload" type="xs:int"/>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

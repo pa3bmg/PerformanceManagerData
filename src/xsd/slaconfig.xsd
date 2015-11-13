@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://perform.pa3bmg.nl/srtg/generated/sla" targetNamespace="http://perform.pa3bmg.nl/srtg/generated/sla" elementFormDefault="qualified" attributeFormDefault="unqualified" xml:lang="EN">
+	<xs:element name="rttMonCtrlAdmin">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="recordsla" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="oid" type="xs:int"/>
+							<xs:element name="data" type="ns1:DataRecSla"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="DataRecSla">
+		<xs:sequence>
+			<xs:element name="Owner" type="xs:string"/>
+			<xs:element name="Tag" type="xs:string"/>
+			<xs:element name="RttType" type="xs:int"/>
+			<xs:element name="Threshold" type="xs:int"/>
+			<xs:element name="Frequency" type="xs:int"/>
+			<xs:element name="Timeout" type="xs:int"/>
+			<xs:element name="VerifyData" type="xs:int"/>
+			<xs:element name="Status" type="xs:int"/>
+			<xs:element name="Nvgen" type="xs:int"/>
+		</xs:sequence>
+	</xs:complexType>
+</xs:schema>

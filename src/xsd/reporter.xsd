@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:ns1="http://perform.pa3bmg.nl/srtg/generated/reporter" targetNamespace="http://perform.pa3bmg.nl/srtg/generated/reporter" elementFormDefault="qualified" attributeFormDefault="unqualified" xml:lang="EN">
+	<xs:element name="reporter">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="type" maxOccurs="unbounded">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="name" type="xs:string"/>
+							<xs:element name="modeltype" type="xs:string" maxOccurs="unbounded"/>
+							<xs:element name="vlable" type="xs:string"/>
+							<xs:element name="def" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="def_name" type="xs:string"/>
+										<xs:element name="def_ref" type="xs:string"/>
+										<xs:element name="def_type" type="xs:string"/>
+										<xs:element name="def_title" type="xs:string"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="cdef" minOccurs="0" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="cdef_name" type="xs:string"/>
+										<xs:element name="cdef_def" type="xs:string"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="area" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="area_name" type="xs:string"/>
+										<xs:element name="area_color" type="xs:string"/>
+										<xs:element name="area_title" type="xs:string"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="line" minOccurs="0" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="line_name" type="xs:string"/>
+										<xs:element name="line_color" type="xs:string"/>
+										<xs:element name="line_title" type="xs:string"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="gprint" maxOccurs="unbounded">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="gp_name" type="xs:string"/>
+										<xs:element name="gp_type" type="xs:string"/>
+										<xs:element name="gp_title" type="xs:string"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="png">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="hor" type="xs:int"/>
+										<xs:element name="ver" type="xs:int"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>
