@@ -1,0 +1,140 @@
+<rrd_graph_def>
+      <span>
+          <start>${start}</start>
+          <end>${end}</end>
+      </span>
+      <options>
+          <use_pool>false</use_pool>
+          <anti_aliasing>true</anti_aliasing>
+          <time_grid>
+              <show_grid>true</show_grid>
+              <!-- allowed units: second, minute, hour, day, week, month, year -->
+              <!--<minor_grid_unit>minute</minor_grid_unit>
+              <minor_grid_unit_count>60</minor_grid_unit_count>
+              <major_grid_unit>hour</major_grid_unit>
+              <major_grid_unit_count>2</major_grid_unit_count>-->
+              <!--<label_unit>hour</label_unit>
+              <label_unit_count>2</label_unit_count>
+              <label_span>1200</label_span>-->
+              <!-- use SimpleDateFormat or strftime-like format to format labels -->
+              <!--<label_format>dd-MMM-yy</label_format>-->
+          </time_grid>
+          <!--<value_grid>
+              <show_grid>true</show_grid>
+              <grid_step>100.0</grid_step>
+              <label_factor>5</label_factor>
+          </value_grid>-->
+          <no_minor_grid>true</no_minor_grid>
+          <alt_y_grid>true</alt_y_grid>
+          <alt_y_mrtg>true</alt_y_mrtg>
+          <alt_autoscale>true</alt_autoscale>
+          <alt_autoscale_max>true</alt_autoscale_max>
+          <units_exponent>0</units_exponent>
+          <units_length>8</units_length>
+          <vertical_label>${Vlabel}</vertical_label>
+          <interlaced>true</interlaced>
+          <image_info>filename = %s, width=%d, height=%d</image_info>
+          <image_format>png</image_format>
+          <image_quality>0.8</image_quality>
+          <unit>k</unit>
+          <!--<lazy>false</lazy>-->
+          <min_value>0</min_value>
+          <!--<max_value>100</max_value>-->
+          <!--<rigid>true</rigid>-->
+          <!--<base>1000</base>-->
+          <!--<logarithmic>true</logarithmic>-->
+          <no_legend>false</no_legend>
+          <only_graph>false</only_graph>
+          <force_rules_legend>false</force_rules_legend>
+          <title>${title}</title>
+          <step>300</step>
+          <fonts>
+              <!--<small_font>
+                  <name>Courier</name>
+                  <style>plain</style>
+                  <size>10</size>
+              </small_font>-->
+              <large_font>
+              	  <name>Comic Sans MS</name>
+				  <style>REGULAR</style>
+				  <size>16</size>
+              </large_font>
+          </fonts>
+          <first_day_of_week>SUNDAY</first_day_of_week>
+      </options>
+      <datasources>
+		<def>
+			<name>input</name>
+			<rrd>${rrd_file}</rrd>
+			<source>ifInOctets</source>
+			<cf>AVERAGE</cf>
+		</def>
+		<def>
+			<name>output</name>
+			<rrd>${rrd_file}</rrd>
+			<source>ifOutOctets</source>
+			<cf>AVERAGE</cf>
+		</def>
+		<cdef>
+			<name>input8</name>
+			<rpn>input,0.008,*</rpn>
+		</cdef>
+		<cdef>
+			<name>output8</name>
+			<rpn>output,0.008,*</rpn>
+		</cdef>
+		<cdef>
+			<name>total</name>
+			<rpn>input8,output8,+</rpn>
+		</cdef>
+	</datasources>
+	<graph>
+		<area>
+			<datasource>total</datasource>
+			<color>#00FF00</color>
+			<legend>Total traffic</legend>
+		</area>
+		<line>
+			<datasource>input8</datasource>
+			<color>#0000FF</color>
+			<legend>Input traffic</legend>
+		</line>
+		<line>
+			<datasource>output8</datasource>
+			<color>#FF0000</color>
+			<legend>Output traffic\l</legend>
+			<width>2</width>
+		</line>
+		<gprint>
+			<datasource>input8</datasource>
+			<cf>AVERAGE</cf>
+			<format>Average input: %4.0f kbit/sec</format>
+		</gprint>
+		<gprint>
+			<datasource>input8</datasource>
+			<cf>MAX</cf>
+			<format>Max input: %4.0f kbit/sec\l</format>
+		</gprint>
+		<gprint>
+			<datasource>output8</datasource>
+			<cf>AVERAGE</cf>
+			<format>Average output:%4.0f kbit/sec</format>
+		</gprint>
+		<gprint>
+			<datasource>output8</datasource>
+			<cf>MAX</cf>
+			<format>Max output:%4.0f kbit/sec\l</format>
+		</gprint>
+		<gprint>
+			<datasource>total</datasource>
+			<cf>AVERAGE</cf>
+			<format>Average total: %4.0f kbit/sec</format>
+		</gprint>
+		<gprint>
+			<datasource>total</datasource>
+			<cf>MAX</cf>
+			<format>Max total: %4.0f kbit/sec\l</format>
+		</gprint>
+		<!--<comment>Created by TITAAN Management</comment>-->
+	</graph>
+  </rrd_graph_def>

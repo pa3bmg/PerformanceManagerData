@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report xmlns="http://perform.pa3bmg.nl/srtg/generated/report">
+	<type>
+		<name>R CPU load</name>
+		<modeltype>Rtr_Cisco</modeltype>
+		<vlable>Processor load %</vlable>
+	    <title>CPU Load for </title>
+		<timelabel>time</timelabel>
+		<xmltemplate>CPULoadTPL.xml</xmltemplate>
+	</type>
+	<type>
+		<name>S CPU load</name>
+		<modeltype>SwCiscoIOS</modeltype>
+		<vlable>Processor load %</vlable>
+	    <title>CPU Load for </title>
+		<timelabel>time</timelabel>
+		<xmltemplate>CPULoadTPL.xml</xmltemplate>
+	</type>
+	<type>
+		<name>WAN port</name>
+		<modeltype>Serial_IF_Port</modeltype>
+		<vlable>WAN load bps</vlable>
+	    <title>WAN Link load for </title>
+		<timelabel>time</timelabel>
+		<xmltemplate>WANTPL.xml</xmltemplate>
+	</type>
+	<type>
+		<name>FrameRelay port</name>
+		<modeltype>FrameRelayPort</modeltype>
+		<vlable>WAN load bps</vlable>
+	    <title>WAN Link load for </title>
+		<timelabel>time</timelabel>
+		<xmltemplate>WANTPL.xml</xmltemplate>
+	</type>
+      <type>
+		<name>LAN port</name>
+		<modeltype>Gen_IF_Port</modeltype>
+		<vlable>LAN load bps</vlable>
+	    <title>LAN Link load for </title>
+		<timelabel>time</timelabel>
+		<xmltemplate>LANTPL.xml</xmltemplate>
+	</type>
+	<type>
+		<name>Host Files</name>
+		<modeltype>Host_Compaq</modeltype>
+		<vlable>LAN load bps</vlable>
+	    <title>%</title>
+		<timelabel>time</timelabel>
+		<xmltemplate>FILETPL.xml</xmltemplate>
+	</type>
+	<type>
+		<name>CPU</name>
+		<modeltype>Host_Compaq</modeltype>
+		<vlable>%</vlable>
+	    <title>CPU Usage</title>
+		<timelabel>time</timelabel>
+		<xmltemplate>FILETPL.xml</xmltemplate>
+	</type>
+	<type>
+		<name>TEMP</name>
+		<modeltype>Host_Compaq</modeltype>
+		<vlable>degrees</vlable>
+	    <title>Server Temp</title>
+		<timelabel>time</timelabel>
+		<xmltemplate>FILETPL.xml</xmltemplate>
+	</type>
+	<type>
+		<name>Resources</name>
+		<modeltype>rfc2790App</modeltype>
+		<vlable>%</vlable>
+	    <title>Server Resources</title>
+		<timelabel>time</timelabel>
+		<xmltemplate>FILETPL.xml</xmltemplate>
+	</type>
+</report>
