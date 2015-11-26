@@ -6,13 +6,14 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Map;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 
-public class JaxbImpl<T> {
+public class JaxbImpl<T, K> {
 
   private Unmarshaller mUnmarshaller = null;
 
@@ -20,10 +21,26 @@ public class JaxbImpl<T> {
 
   private boolean mIsConfigured = false;
 
-  private final URL mDefaultResourceUrl;
+  private URL mDefaultResourceUrl;
 
-  public JaxbImpl(String pContextPath, String pDefaultResourceName) {
-    mDefaultResourceUrl = JaxbImpl.class.getResource(pDefaultResourceName);
+  private Map<K, URL> mKeyVsUrl;
+
+  public JaxbImpl(String pContextPath) {
+    this(pContextPath, null, null);
+  }
+
+  public JaxbImpl(String pContextPath, URL pDefaultResourceUrl) {
+    this(pContextPath, pDefaultResourceUrl, null);
+  }
+
+  public JaxbImpl(String pContextPath, Map<K, URL> pKeyVsUrl) {
+    this(pContextPath, null, pKeyVsUrl);
+  }
+
+  public JaxbImpl(String pContextPath, URL pDefaultResourceUrl, Map<K, URL> pKeyVsUrl) {
+    mDefaultResourceUrl = pDefaultResourceUrl;
+    mKeyVsUrl = pKeyVsUrl;
+
     try {
       JAXBContext context = JAXBContext.newInstance(pContextPath);
       mUnmarshaller = context.createUnmarshaller();
@@ -35,6 +52,9 @@ public class JaxbImpl<T> {
   }
 
   public T readXml() {
+    if (mDefaultResourceUrl == null) {
+      return null;
+    }
     return readXml(mDefaultResourceUrl);
   }
 
@@ -46,6 +66,13 @@ public class JaxbImpl<T> {
       return null;
     }
     return readXml(urlToFile);
+  }
+
+  public T readXmlForKey(K pKey) {
+    if (mKeyVsUrl == null) {
+      return null;
+    }
+    return readXml(mKeyVsUrl.get(pKey));
   }
 
   @SuppressWarnings("unchecked")

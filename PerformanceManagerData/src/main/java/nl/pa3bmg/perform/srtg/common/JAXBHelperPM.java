@@ -1,13 +1,8 @@
 package nl.pa3bmg.perform.srtg.common;
 
 import java.net.URL;
+import java.util.HashMap;
 
-import nl.pa3bmg.perform.srtg.common.internal.JAXBInexport;
-import nl.pa3bmg.perform.srtg.common.internal.JAXBInfo;
-import nl.pa3bmg.perform.srtg.common.internal.JAXBModels;
-import nl.pa3bmg.perform.srtg.common.internal.JAXBReporter;
-import nl.pa3bmg.perform.srtg.common.internal.JAXBRrd;
-import nl.pa3bmg.perform.srtg.common.internal.JAXBSla;
 import nl.pa3bmg.perform.srtg.common.internal.JaxbImpl;
 
 /*
@@ -24,86 +19,66 @@ import nl.pa3bmg.perform.srtg.generated.sla.RttMonCtrlAdmin;
 import nl.pa3bmg.perform.srtg.generated.slogger.Slogger;
 
 public class JAXBHelperPM {
-  private JAXBInexport JBInexport = null;
+  private final JaxbImpl<Inexport, ?> C_JAXB_INEXPORT = new JaxbImpl<>("nl.pa3bmg.perform.srtg.generated.inexport");
 
-  private JAXBInfo JBInfo = null;
+  private final JaxbImpl<Info, ?> C_JAXB_INFO = new JaxbImpl<>("nl.pa3bmg.perform.srtg.generated.info");
 
-  private JAXBModels JBModels = null;
+  private final static JaxbImpl<Models, ?> C_JAXB_MODELS = new JaxbImpl<>("nl.pa3bmg.perform.srtg.generated.models");
 
-  private JAXBReporter JBReporter = null;
+  private final JaxbImpl<Reporter, ?> C_JAXB_REPORTER = new JaxbImpl<>("nl.pa3bmg.perform.srtg.generated.reporter");
 
-  private JAXBRrd JBRrd = null;
+  private final static JaxbImpl<RrdGraphDef, String> C_JAXB_RRD_GRAPH_DEF = new JaxbImpl<>("nl.pa3bmg.perform.srtg.generated.rep", new HashMap<String, URL>() {
+    private static final long serialVersionUID = 362498820777181265L;
 
-  private JAXBSla JBSla = null;
-
-  private final static JaxbImpl<Report> C_JAXB_REPORT = new JaxbImpl<Report>("nl.pa3bmg.perform.srtg.generated.report", "/report.xml");
-
-  private final static JaxbImpl<Slogger> C_JAXB_SLOGGER = new JaxbImpl<Slogger>("nl.pa3bmg.perform.srtg.generated.slogger", "/logger.xml");
-
-  //// JBInexport //////////////////////////////////////////////
-  public Inexport readImportXML(String fileName) {
-    if (JBInexport == null) {
-      JBInexport = new JAXBInexport();
+    {
+      put("SLA_html", JAXBHelperPM.class.getResource("/SLA_html.xml"));
+      put("SLA_html1", JAXBHelperPM.class.getResource("/SLA_html1.xml"));
     }
-    return JBInexport.readImportXML(fileName);
+  });
+
+  private final JaxbImpl<RttMonCtrlAdmin, ?> C_JAXB_SLA = new JaxbImpl<>("nl.pa3bmg.perform.srtg.generated.sla");
+
+  private final static JaxbImpl<Report, ?> C_JAXB_REPORT = new JaxbImpl<>("nl.pa3bmg.perform.srtg.generated.report", JAXBHelperPM.class.getResource("/report.xml"));
+
+  private final static JaxbImpl<Slogger, ?> C_JAXB_SLOGGER = new JaxbImpl<>("nl.pa3bmg.perform.srtg.generated.slogger", JAXBHelperPM.class.getResource("/logger.xml"));
+
+  //// C_JAXB_INEXPORT //////////////////////////////////////////////
+  public Inexport readImportXML(String pFileName) {
+    return C_JAXB_INEXPORT.readXml(pFileName);
   }
 
-  public String writeImportToString(Inexport inexport) {
-    if (JBInexport == null) {
-      JBInexport = new JAXBInexport();
-    }
-    return JBInexport.writeImportToString(inexport);
+  public String writeImportToString(Inexport pInexport) {
+    return C_JAXB_INEXPORT.writeToString(pInexport);
   }
 
-  public boolean writeImportToXML(String fileName, Inexport inexport) {
-    if (JBInexport == null) {
-      JBInexport = new JAXBInexport();
-    }
-    return JBInexport.writeImportToXML(fileName, inexport);
+  public boolean writeImportToXML(String pFileName, Inexport pInexport) {
+    return C_JAXB_INEXPORT.writeToXml(pFileName, pInexport);
   }
 
   ////JAXBInfo //////////////////////////////////////////////
-  public Info readInfoXML(String fileName) {
-    if (JBInfo == null) {
-      JBInfo = new JAXBInfo();
-    }
-    return JBInfo.readInfoXML(fileName);
+  public Info readInfoXML(String pFileName) {
+    return C_JAXB_INFO.readXml(pFileName);
   }
 
-  public String writeInfoToString(Info info) {
-    if (JBInfo == null) {
-      JBInfo = new JAXBInfo();
-    }
-    return JBInfo.writeInfoToString(info);
+  public String writeInfoToString(Info pInfo) {
+    return C_JAXB_INFO.writeToString(pInfo);
   }
 
-  public boolean writeInfoToXML(String fileName, Info info) {
-    if (JBInfo == null) {
-      JBInfo = new JAXBInfo();
-    }
-    return JBInfo.writeInfoToXML(fileName, info);
+  public boolean writeInfoToXML(String pFileName, Info pInfo) {
+    return C_JAXB_INFO.writeToXml(pFileName, pInfo);
   }
 
   ////JAXBModels //////////////////////////////////////////////
-  public Models readModelsXML(String fileName) {
-    if (JBModels == null) {
-      JBModels = new JAXBModels();
-    }
-    return JBModels.readModelsXML(fileName);
+  public static Models readModelsXML(String pFileName) {
+    return C_JAXB_MODELS.readXml(pFileName);
   }
 
-  public boolean writeModelsToXML(String fileName, Models models) {
-    if (JBModels == null) {
-      JBModels = new JAXBModels();
-    }
-    return JBModels.writeModelsToXML(fileName, models);
+  public static boolean writeModelsToXML(String pFileName, Models pModels) {
+    return C_JAXB_MODELS.writeToXml(pFileName, pModels);
   }
 
-  public String writeModelsToString(Models models) {
-    if (JBModels == null) {
-      JBModels = new JAXBModels();
-    }
-    return JBModels.writeModelsToString(models);
+  public static String writeModelsToString(Models pModels) {
+    return C_JAXB_MODELS.writeToString(pModels);
   }
 
   ////JAXBReport //////////////////////////////////////////////
@@ -120,47 +95,29 @@ public class JAXBHelperPM {
   }
 
   ////JAXBReporter //////////////////////////////////////////////
-  public Reporter readReporterXML(String fileName) {
-    if (JBReporter == null) {
-      JBReporter = new JAXBReporter();
-    }
-    return JBReporter.readReporterXML(fileName);
+  public Reporter readReporterXML(String pFileName) {
+    return C_JAXB_REPORTER.readXml(pFileName);
   }
 
-  public boolean writeReporterToXML(String fileName, Reporter reporter) {
-    if (JBReporter == null) {
-      JBReporter = new JAXBReporter();
-    }
-    return JBReporter.writeReporterToXML(fileName, reporter);
+  public boolean writeReporterToXML(String pFileName, Reporter pReporter) {
+    return C_JAXB_REPORTER.writeToXml(pFileName, pReporter);
   }
 
-  public String writeReporterToString(Reporter reporter) {
-    if (JBReporter == null) {
-      JBReporter = new JAXBReporter();
-    }
-    return JBReporter.writeReporterToString(reporter);
+  public String writeReporterToString(Reporter pReporter) {
+    return C_JAXB_REPORTER.writeToString(pReporter);
   }
 
   ////JAXBSla //////////////////////////////////////////////
-  public RttMonCtrlAdmin readSlaXML(String fileName) {
-    if (JBSla == null) {
-      JBSla = new JAXBSla();
-    }
-    return JBSla.readSlaXML(fileName);
+  public RttMonCtrlAdmin readSlaXML(String pFileName) {
+    return C_JAXB_SLA.readXml(pFileName);
   }
 
-  public boolean writeSlaToXML(String fileName, RttMonCtrlAdmin info) {
-    if (JBSla == null) {
-      JBSla = new JAXBSla();
-    }
-    return JBSla.writeSlaToXML(fileName, info);
+  public boolean writeSlaToXML(String pFileName, RttMonCtrlAdmin pRttMonCtrlAdmin) {
+    return C_JAXB_SLA.writeToXml(pFileName, pRttMonCtrlAdmin);
   }
 
-  public String writeSlaToString(RttMonCtrlAdmin info) {
-    if (JBSla == null) {
-      JBSla = new JAXBSla();
-    }
-    return JBSla.writeSlaToString(info);
+  public String writeSlaToString(RttMonCtrlAdmin pRttMonCtrlAdmin) {
+    return C_JAXB_SLA.writeToString(pRttMonCtrlAdmin);
   }
 
   ////JAXBSlogger //////////////////////////////////////////////
@@ -185,24 +142,19 @@ public class JAXBHelperPM {
   }
 
   ////JAXBSlogger //////////////////////////////////////////////
-  public RrdGraphDef readRrdXML(String fileName) {
-    if (JBRrd == null) {
-      JBRrd = new JAXBRrd();
-    }
-    return JBRrd.readRrdXML(fileName);
+  public static RrdGraphDef readRrdXML(String pFileName) {
+    return C_JAXB_RRD_GRAPH_DEF.readXml(pFileName);
   }
 
-  public boolean writeRrdToXML(String fileName, RrdGraphDef info) {
-    if (JBRrd == null) {
-      JBRrd = new JAXBRrd();
-    }
-    return JBRrd.writeRrdToXML(fileName, info);
+  public static RrdGraphDef readRrdXmlForKey(String pKey) {
+    return C_JAXB_RRD_GRAPH_DEF.readXmlForKey(pKey);
   }
 
-  public String writeRrdToString(RrdGraphDef info) {
-    if (JBRrd == null) {
-      JBRrd = new JAXBRrd();
-    }
-    return JBRrd.writeRrdToString(info);
+  public static boolean writeRrdToXML(String pFileName, RrdGraphDef pRrdGraphDef) {
+    return C_JAXB_RRD_GRAPH_DEF.writeToXml(pFileName, pRrdGraphDef);
+  }
+
+  public static String writeRrdToString(RrdGraphDef pRrdGraphDef) {
+    return C_JAXB_RRD_GRAPH_DEF.writeToString(pRrdGraphDef);
   }
 }

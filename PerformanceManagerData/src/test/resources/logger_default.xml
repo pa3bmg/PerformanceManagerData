@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<slogger xmlns="http://perform.pa3bmg.nl/srtg/generated/slogger" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <group>
+    <name>logger_default</name>
+    <attributes>
+      <poll>300</poll>
+      <attr>
+        <name>avgBusy1</name>
+        <id>0x2100cc</id>
+      </attr>
+      <attr>
+        <name>avgBusy5</name>
+        <id>0x2100cd</id>
+      </attr>
+    </attributes>
+    <mtype>
+      <mt>SwCiscoIOS</mt>
+      <mt>Rtr_Cisco</mt>
+    </mtype>
+  </group>
+</slogger>

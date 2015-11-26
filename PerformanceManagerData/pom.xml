@@ -37,7 +37,7 @@
     <plugin.mavenCompiler.target>1.7</plugin.mavenCompiler.target>
     <plugin.mavenResources.version>2.7</plugin.mavenResources.version>
     <plugin.mavenRelease.version>2.5.1</plugin.mavenRelease.version>
-    <plugin.mavenBundle.version>2.5.3</plugin.mavenBundle.version>
+    <plugin.mavenBundle.version>3.0.1</plugin.mavenBundle.version>
     <plugin.mavenBundle.instructions.includeResource>{maven-resources}</plugin.mavenBundle.instructions.includeResource>
     <plugin.mavenDeploy.version>2.8.2</plugin.mavenDeploy.version>
     <plugin.mavenScm.version>1.8.1</plugin.mavenScm.version>
@@ -46,7 +46,7 @@
     <!-- Problem with tag in repositories. -->
     <!-- Workaround. Create minimal one tag in current branche. Example: Initial commit with tag '0.1 -->
     <plugin.gitCommitId.version>2.1.9</plugin.gitCommitId.version>
-    <plugin.gitCommitId.git.basePartDirectory>/.git</plugin.gitCommitId.git.basePartDirectory>
+    <plugin.gitCommitId.git.basePartDirectory>/../.git</plugin.gitCommitId.git.basePartDirectory>
     <plugin.gitCommitId.git.directory>${project.basedir}${plugin.gitCommitId.git.basePartDirectory}</plugin.gitCommitId.git.directory>
     <plugin.gitCommitId.gitProperties.path>target/git-resources/</plugin.gitCommitId.gitProperties.path>
     <plugin.gitCommitId.gitProperties.fileName>${plugin.gitCommitId.gitProperties.path}git.properties</plugin.gitCommitId.gitProperties.fileName>
