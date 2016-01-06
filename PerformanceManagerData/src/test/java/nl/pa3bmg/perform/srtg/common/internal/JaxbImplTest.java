@@ -20,9 +20,9 @@ import nl.pa3bmg.perform.srtg.generated.slogger.Slogger;
  */
 public class JaxbImplTest {
 
-  private final static String C_ASSERT_NOT_NULL_MESSAGE = "An object must be returned and not null.";
+  private static final String C_ASSERT_NOT_NULL_MESSAGE = "An object must be returned and not null.";
 
-  private final static String C_WRONG_VALUE_MESSAGE = "Wrong value of object.";
+  private static final String C_WRONG_VALUE_MESSAGE = "Wrong value of object.";
 
   /**
    * Test method for {@link nl.pa3bmg.perform.srtg.common.internal.JaxbImpl#readXml()}.

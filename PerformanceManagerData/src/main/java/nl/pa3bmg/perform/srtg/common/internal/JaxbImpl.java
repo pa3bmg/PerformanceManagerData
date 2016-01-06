@@ -37,12 +37,19 @@ public class JaxbImpl<T, K> {
     this(pContextPath, null, pKeyVsUrl);
   }
 
+  /**
+   * @param pContextPath
+   * @param pDefaultResourceUrl
+   * @param pKeyVsUrl
+   *          <p>
+   *          <b>Remark:</b> The java objects (representing the XML files) must be internal present in the jar!
+   */
   public JaxbImpl(String pContextPath, URL pDefaultResourceUrl, Map<K, URL> pKeyVsUrl) {
     mDefaultResourceUrl = pDefaultResourceUrl;
     mKeyVsUrl = pKeyVsUrl;
 
     try {
-      JAXBContext context = JAXBContext.newInstance(pContextPath);
+      JAXBContext context = JAXBContext.newInstance(pContextPath, JaxbImpl.class.getClassLoader());
       mUnmarshaller = context.createUnmarshaller();
       mMarshaller = context.createMarshaller();
       mIsConfigured = true;
@@ -93,6 +100,7 @@ public class JaxbImpl<T, K> {
     if (!mIsConfigured) {
       return false;
     }
+
     try (FileWriter fileWriter = new FileWriter(pFileName)) {
       mMarshaller.marshal(pJaxbElement, fileWriter);
       return true;
@@ -105,8 +113,8 @@ public class JaxbImpl<T, K> {
     if (!mIsConfigured) {
       return null;
     }
-    try (StringWriter stringWriter = new StringWriter()) {
 
+    try (StringWriter stringWriter = new StringWriter()) {
       mMarshaller.marshal(pJaxbElement, stringWriter);
       return stringWriter.toString();
     } catch (JAXBException | IOException e) {

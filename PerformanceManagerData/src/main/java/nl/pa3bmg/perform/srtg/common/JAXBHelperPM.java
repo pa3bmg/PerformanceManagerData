@@ -19,15 +19,15 @@ import nl.pa3bmg.perform.srtg.generated.sla.RttMonCtrlAdmin;
 import nl.pa3bmg.perform.srtg.generated.slogger.Slogger;
 
 public class JAXBHelperPM {
-  private final JaxbImpl<Inexport, ?> C_JAXB_INEXPORT = new JaxbImpl<>("nl.pa3bmg.perform.srtg.generated.inexport");
+  private static final JaxbImpl<Inexport, ?> C_JAXB_INEXPORT = new JaxbImpl<>("nl.pa3bmg.perform.srtg.generated.inexport");
 
-  private final JaxbImpl<Info, ?> C_JAXB_INFO = new JaxbImpl<>("nl.pa3bmg.perform.srtg.generated.info");
+  private static final JaxbImpl<Info, ?> C_JAXB_INFO = new JaxbImpl<>("nl.pa3bmg.perform.srtg.generated.info");
 
-  private final static JaxbImpl<Models, ?> C_JAXB_MODELS = new JaxbImpl<>("nl.pa3bmg.perform.srtg.generated.models");
+  private static final JaxbImpl<Models, ?> C_JAXB_MODELS = new JaxbImpl<>("nl.pa3bmg.perform.srtg.generated.models");
 
-  private final JaxbImpl<Reporter, ?> C_JAXB_REPORTER = new JaxbImpl<>("nl.pa3bmg.perform.srtg.generated.reporter");
+  private static final JaxbImpl<Reporter, ?> C_JAXB_REPORTER = new JaxbImpl<>("nl.pa3bmg.perform.srtg.generated.reporter");
 
-  private final static JaxbImpl<RrdGraphDef, String> C_JAXB_RRD_GRAPH_DEF = new JaxbImpl<>("nl.pa3bmg.perform.srtg.generated.rep", new HashMap<String, URL>() {
+  private static final JaxbImpl<RrdGraphDef, String> C_JAXB_RRD_GRAPH_DEF = new JaxbImpl<>("nl.pa3bmg.perform.srtg.generated.rep", new HashMap<String, URL>() {
     private static final long serialVersionUID = 362498820777181265L;
 
     {
@@ -36,35 +36,35 @@ public class JAXBHelperPM {
     }
   });
 
-  private final JaxbImpl<RttMonCtrlAdmin, ?> C_JAXB_SLA = new JaxbImpl<>("nl.pa3bmg.perform.srtg.generated.sla");
+  private static final JaxbImpl<RttMonCtrlAdmin, ?> C_JAXB_SLA = new JaxbImpl<>("nl.pa3bmg.perform.srtg.generated.sla");
 
-  private final static JaxbImpl<Report, ?> C_JAXB_REPORT = new JaxbImpl<>("nl.pa3bmg.perform.srtg.generated.report", JAXBHelperPM.class.getResource("/report.xml"));
+  private static final JaxbImpl<Report, ?> C_JAXB_REPORT = new JaxbImpl<>("nl.pa3bmg.perform.srtg.generated.report", JAXBHelperPM.class.getResource("/report.xml"));
 
-  private final static JaxbImpl<Slogger, ?> C_JAXB_SLOGGER = new JaxbImpl<>("nl.pa3bmg.perform.srtg.generated.slogger", JAXBHelperPM.class.getResource("/logger.xml"));
+  private static final JaxbImpl<Slogger, ?> C_JAXB_SLOGGER = new JaxbImpl<>("nl.pa3bmg.perform.srtg.generated.slogger", JAXBHelperPM.class.getResource("/logger.xml"));
 
   //// C_JAXB_INEXPORT //////////////////////////////////////////////
-  public Inexport readImportXML(String pFileName) {
+  public static Inexport readImportXML(String pFileName) {
     return C_JAXB_INEXPORT.readXml(pFileName);
   }
 
-  public String writeImportToString(Inexport pInexport) {
+  public static String writeImportToString(Inexport pInexport) {
     return C_JAXB_INEXPORT.writeToString(pInexport);
   }
 
-  public boolean writeImportToXML(String pFileName, Inexport pInexport) {
+  public static boolean writeImportToXML(String pFileName, Inexport pInexport) {
     return C_JAXB_INEXPORT.writeToXml(pFileName, pInexport);
   }
 
   ////JAXBInfo //////////////////////////////////////////////
-  public Info readInfoXML(String pFileName) {
+  public static Info readInfoXML(String pFileName) {
     return C_JAXB_INFO.readXml(pFileName);
   }
 
-  public String writeInfoToString(Info pInfo) {
+  public static String writeInfoToString(Info pInfo) {
     return C_JAXB_INFO.writeToString(pInfo);
   }
 
-  public boolean writeInfoToXML(String pFileName, Info pInfo) {
+  public static boolean writeInfoToXML(String pFileName, Info pInfo) {
     return C_JAXB_INFO.writeToXml(pFileName, pInfo);
   }
 
@@ -82,6 +82,10 @@ public class JAXBHelperPM {
   }
 
   ////JAXBReport //////////////////////////////////////////////
+  public static Report readReportXML() {
+    return C_JAXB_REPORT.readXml();
+  }
+
   public static Report readReportXML(String pFileName) {
     return C_JAXB_REPORT.readXml(pFileName);
   }
@@ -95,28 +99,28 @@ public class JAXBHelperPM {
   }
 
   ////JAXBReporter //////////////////////////////////////////////
-  public Reporter readReporterXML(String pFileName) {
+  public static Reporter readReporterXML(String pFileName) {
     return C_JAXB_REPORTER.readXml(pFileName);
   }
 
-  public boolean writeReporterToXML(String pFileName, Reporter pReporter) {
+  public static boolean writeReporterToXML(String pFileName, Reporter pReporter) {
     return C_JAXB_REPORTER.writeToXml(pFileName, pReporter);
   }
 
-  public String writeReporterToString(Reporter pReporter) {
+  public static String writeReporterToString(Reporter pReporter) {
     return C_JAXB_REPORTER.writeToString(pReporter);
   }
 
   ////JAXBSla //////////////////////////////////////////////
-  public RttMonCtrlAdmin readSlaXML(String pFileName) {
+  public static RttMonCtrlAdmin readSlaXML(String pFileName) {
     return C_JAXB_SLA.readXml(pFileName);
   }
 
-  public boolean writeSlaToXML(String pFileName, RttMonCtrlAdmin pRttMonCtrlAdmin) {
+  public static boolean writeSlaToXML(String pFileName, RttMonCtrlAdmin pRttMonCtrlAdmin) {
     return C_JAXB_SLA.writeToXml(pFileName, pRttMonCtrlAdmin);
   }
 
-  public String writeSlaToString(RttMonCtrlAdmin pRttMonCtrlAdmin) {
+  public static String writeSlaToString(RttMonCtrlAdmin pRttMonCtrlAdmin) {
     return C_JAXB_SLA.writeToString(pRttMonCtrlAdmin);
   }
 

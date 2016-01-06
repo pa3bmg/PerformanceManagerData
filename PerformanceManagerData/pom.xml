@@ -52,6 +52,7 @@
     <plugin.gitCommitId.gitProperties.fileName>${plugin.gitCommitId.gitProperties.path}git.properties</plugin.gitCommitId.gitProperties.fileName>
 
     <junit.version>4.12</junit.version>
+    <commons-lang3.version>3.3.2</commons-lang3.version>
 
     <!-- Manifest properties -->
     <manifest.permissions>all-permissions</manifest.permissions>
@@ -65,6 +66,10 @@
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>
     </dependency>
+    <dependency>
+      <groupId>org.apache.commons</groupId>
+      <artifactId>commons-lang3</artifactId>
+    </dependency>
   </dependencies>
 
   <dependencyManagement>
@@ -73,6 +78,12 @@
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
         <version>${junit.version}</version>
+        <scope>test</scope>
+      </dependency>
+      <dependency>
+        <groupId>org.apache.commons</groupId>
+        <artifactId>commons-lang3</artifactId>
+        <version>${commons-lang3.version}</version>
         <scope>test</scope>
       </dependency>
     </dependencies>
