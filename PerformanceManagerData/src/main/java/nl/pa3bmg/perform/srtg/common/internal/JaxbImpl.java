@@ -10,14 +10,9 @@ import java.util.Map;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
 
 public class JaxbImpl<T, K> {
-
-  private Unmarshaller mUnmarshaller = null;
-
-  private Marshaller mMarshaller = null;
+  private JAXBContext mJaxbContext;
 
   private boolean mIsConfigured = false;
 
@@ -49,9 +44,7 @@ public class JaxbImpl<T, K> {
     mKeyVsUrl = pKeyVsUrl;
 
     try {
-      JAXBContext context = JAXBContext.newInstance(pContextPath, JaxbImpl.class.getClassLoader());
-      mUnmarshaller = context.createUnmarshaller();
-      mMarshaller = context.createMarshaller();
+      mJaxbContext = JAXBContext.newInstance(pContextPath, JaxbImpl.class.getClassLoader());
       mIsConfigured = true;
     } catch (JAXBException e) {
       mIsConfigured = false;
@@ -59,9 +52,6 @@ public class JaxbImpl<T, K> {
   }
 
   public T readXml() {
-    if (mDefaultResourceUrl == null) {
-      return null;
-    }
     return readXml(mDefaultResourceUrl);
   }
 
@@ -84,41 +74,44 @@ public class JaxbImpl<T, K> {
 
   @SuppressWarnings("unchecked")
   public T readXml(URL pUrl) {
-    if (!mIsConfigured) {
-      return null;
-    }
     T jaxbElement = null;
-    try {
-      jaxbElement = (T) mUnmarshaller.unmarshal(pUrl);
-    } catch (Exception e) {
-      return null;
+
+    if (mIsConfigured) {
+      try {
+        jaxbElement = (T) mJaxbContext.createUnmarshaller().unmarshal(pUrl);
+      } catch (Exception e) {
+        // Swallow.
+      }
     }
     return jaxbElement;
   }
 
   public boolean writeToXml(String pFileName, T pJaxbElement) {
-    if (!mIsConfigured) {
-      return false;
-    }
+    boolean resultOk = false;
 
-    try (FileWriter fileWriter = new FileWriter(pFileName)) {
-      mMarshaller.marshal(pJaxbElement, fileWriter);
-      return true;
-    } catch (JAXBException | IOException e) {
-      return false;
+    if (mIsConfigured) {
+      try (FileWriter fileWriter = new FileWriter(pFileName)) {
+        mJaxbContext.createMarshaller().marshal(pJaxbElement, fileWriter);
+        resultOk = true;
+      } catch (JAXBException | IOException e) {
+        // Swallow.
+      }
     }
+    return resultOk;
   }
 
   public String writeToString(T pJaxbElement) {
-    if (!mIsConfigured) {
-      return null;
-    }
+    String resultOk = null;
 
-    try (StringWriter stringWriter = new StringWriter()) {
-      mMarshaller.marshal(pJaxbElement, stringWriter);
-      return stringWriter.toString();
-    } catch (JAXBException | IOException e) {
-      return null;
+    if (mIsConfigured) {
+      StringWriter stringWriterx = new StringWriter();
+      try (StringWriter stringWriter = stringWriterx) {
+        mJaxbContext.createMarshaller().marshal(pJaxbElement, stringWriter);
+        resultOk = stringWriter.toString();
+      } catch (JAXBException | IOException e) {
+        // Swallow.
+      }
     }
+    return resultOk;
   }
 }
